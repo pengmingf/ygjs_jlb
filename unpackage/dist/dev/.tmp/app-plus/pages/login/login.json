@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "教练端-登录",
+  "usingComponents": {
+    "m-input": "/components/m-input"
+  }
+}
