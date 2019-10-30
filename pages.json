@@ -26,6 +26,18 @@
                 "navigationBarTitleText": "我的"
             }
         }
+        ,{
+            "path" : "pages/daka/daka",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/tuser/tuser",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/tuser_detail/tuser_detail",
+            "style" : {}
+        }
     ],
     "tabBar": {
         "color": "#7a7e83",
