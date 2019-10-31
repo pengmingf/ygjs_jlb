@@ -2,15 +2,15 @@
     <view class="content">
         <view v-if="is_login" class="hello">
             <view class="title">
-                您好 {{userName}}，您已成功登录。
+                您好，您已成功登录。
             </view>
             <view class="ul">
                 <view>这是 uni-app 带登录模板的示例App首页。</view>
                 <view>在 “我的” 中点击 “退出” 可以 “注销当前账户”</view>
             </view>
 			<view class="box">
-				<button type="primary" @click="to('daka')">打卡</button>
-				<button type="default" @click="weight()">体重录入</button>
+				<!-- <button type="primary" @click="to('daka')">打卡</button> -->
+				<!-- <button type="default" @click="to('weight')">体重录入</button> -->
 				<button type="primary" @click="to('tuser')">学员管理</button>
 				<button type="default" @click="food_menu()">修改食谱</button>
 				<button type="primary" @click="food_to()">明日特供(订单)</button>
@@ -62,16 +62,18 @@
 		
 		methods:{
 			to(where){
-				if(where == 'daka')
+				if(where == 'weight')
 				{
 					uni.navigateTo({
-						url:'../daka/daka'
+						url:'../tuser_weight/tuser_weight'
 					})
 				}
 				if(where == 'tuser')
-				uni.navigateTo({
-					url:'../tuser/tuser'
-				})
+				{
+					uni.navigateTo({
+						url:'../tuser/tuser'
+					})
+				}
 				
 			},
 		},

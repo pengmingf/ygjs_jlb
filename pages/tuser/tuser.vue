@@ -17,6 +17,20 @@
 					<view  v-if="value.qiandao">
 						<button  type="primary" size="mini" style="margin-left:10upx ;" disabled >已到</button>
 					</view>
+					<!-- <view>
+						<button  type="primary" size="mini" style="margin-left:10upx ;" >{{multiArray[0][multiIndex[0]]}}</button>
+					</view> -->
+					<!-- 多列选择器 -->
+					<view class="uni-list-cell">
+						<picker mode="selector" :data-id='value.id' :data-index='key'  @change="before_weight"   :value="value.before_value" :range="array">
+							<button  type="default" size="mini" style="margin-left:10upx ;" >{{value.before_sp || "运动前"}}</button>
+						</picker>
+					</view>
+					<view class="uni-list-cell">
+						<picker mode="selector" :data-id='value.id' :data-index='key' @change="after_weight"  :value="value.after_value" :range="array"> 
+							<button  type="warn" size="mini" style="margin-left:10upx ;" >{{value.after_sp || "运动后"}}</button>
+						</picker>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -37,27 +51,28 @@
 				showImg:true,
 				token : null,
 				list: [{
-						id:"1",
-						name: "幸福",
-						phone: "能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？",
+						id:"97",
+						name: "杨过",
+						phone: "18723659468",
 						img: "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png",
 						qiandao:false
 					},
 					{
-						id:"2",
-						name: "木屋",
-						phone: "想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖。",
+						id:"98",
+						name: "郝少兵",
+						phone: "18723659468",
 						img: "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png",
 						qiandao:false
 					},
 					{
-						id:'3',
-						name: "CBD",
-						phone: "烤炉模式的城，到黄昏，如同打翻的调色盘一般。",
+						id:'99',
+						name: "周干鹏",
+						phone: "18723659468",
 						img: "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png",
 						qiandao:false
 					}
-				]
+				],
+				array: [],
 			}
 		},
 		methods: {
@@ -106,7 +121,60 @@
 				uni.navigateTo({
 					url:'../tuser_detail/tuser_detail?id='+value.id
 				})
-			}
+			},
+			before_weight(e)
+			{
+				// var nub = e.currentTarget.dataset.index;
+				var tuser_id = e.currentTarget.dataset.id;
+				var weight = this.array[e.detail.value];
+				var status = 10;
+				this.weight_to(tuser_id,weight,status);
+				this.list[e.currentTarget.dataset.index].before_sp = this.array[e.detail.value];
+			},
+			after_weight(e)
+			{
+				// var nub = e.currentTarget.dataset.index;
+				var tuser_id = e.currentTarget.dataset.id;
+				var weight = this.array[e.detail.value];
+				var status = 11;
+				this.weight_to(tuser_id,weight,status);
+				this.list[e.currentTarget.dataset.index].after_sp = this.array[e.detail.value];
+			},
+			//写入服务器
+			weight_to(tuser_id,weight,status)
+			{
+				uni.request({
+					url:'https://ygjs.mfmeat.top/index.php/api/user/weightin',
+					data:{'token':this.token,'tuser_id':tuser_id,'weight':weight,'status':status},
+					dataType:'json',
+					method:'POST',
+					success: (res) => {
+						if(res.data.code == 1)
+						{
+							
+						}else{
+							uni.showModal({
+								title:'出错了'
+							});
+						}
+					},
+					fail: () => { 
+						uni.showModal({
+							title:'网络异常，请检查网络'
+						});
+					}
+				});
+			},
+			/*
+			*渲染体重数据
+			*/
+		   weight()
+		   {
+			   for(let i=70;i<200;i++)
+			   {
+				   this.array.push(i);
+			   }
+		   },
 		},
 		onLoad(){
 			this.token = md5('allDetailpmf');
@@ -120,11 +188,26 @@
 					{
 						for(var i=0; i<res.data.message.length;i++)
 						{
-							var data_push ={"name":res.data.message[i].name,
+							var data_push ={"id":res.data.message[i].Id,
+											"name":res.data.message[i].name,
 											"phone":res.data.message[i].phone,
 											"img":res.data.message[i].image,
 											'qiandao':res.data.message[i].qiandao,
-											'id':res.data.message[i].Id};
+											'id':res.data.message[i].Id,
+											'before_sp':res.data.message[i].before_weight,
+											'after_sp':res.data.message[i].after_weight,
+											'before_value':res.data.message[i].before_weight-70,
+											'after_value':res.data.message[i].after_weight-70};
+							if(!res.data.message[i].before_weight)
+							{
+								data_push.before_weight = 35;
+								data_push.before_sp = null;
+							}
+							if(!res.data.message[i].after_weight)
+							{
+								data_push.after_weight = 33;
+								data_push.after_sp = null;
+							}
 							this.list.push(data_push);
 						}
 					}else{
@@ -136,10 +219,29 @@
 				}
 			})
 		},
+		onReady() {
+			this.weight();
+		}
 	}
 </script>
 
 <style>
+	
+	.uni-list-cell {
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.uni-input {
+		height: 50upx;
+		padding: 15upx 25upx;
+		line-height:50upx;
+		font-size:28upx;
+		background:#FFF;
+		flex: 1;
+	}
 
 	/* 列表 */
 	.uni-list {

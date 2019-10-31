@@ -38,6 +38,10 @@
             "path" : "pages/tuser_detail/tuser_detail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/tuser_weight/tuser_weight",
+            "style" : {}
+        }
     ],
     "tabBar": {
         "color": "#7a7e83",
