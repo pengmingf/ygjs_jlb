@@ -42,6 +42,14 @@
             "path" : "pages/tuser_weight/tuser_weight",
             "style" : {}
         }
+        ,{
+            "path" : "pages/food_menu/food_menu",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/yuding_gl/yuding_gl",
+            "style" : {}
+        }
     ],
     "tabBar": {
         "color": "#7a7e83",

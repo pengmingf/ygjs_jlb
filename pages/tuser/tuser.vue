@@ -200,12 +200,12 @@
 											'after_value':res.data.message[i].after_weight-70};
 							if(!res.data.message[i].before_weight)
 							{
-								data_push.before_weight = 35;
+								data_push.before_value = 35;
 								data_push.before_sp = null;
 							}
 							if(!res.data.message[i].after_weight)
 							{
-								data_push.after_weight = 33;
+								data_push.after_value = 33;
 								data_push.after_sp = null;
 							}
 							this.list.push(data_push);
@@ -447,7 +447,7 @@
 		flex-direction: row;
 	}
 	.uni-navigate-right.uni-media-list {
-		padding-right: 74upx;
+		padding-right: 7upx;
 	}
 	.uni-pull-right {
 		flex-direction: row-reverse;

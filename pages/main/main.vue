@@ -9,11 +9,9 @@
                 <view>在 “我的” 中点击 “退出” 可以 “注销当前账户”</view>
             </view>
 			<view class="box">
-				<!-- <button type="primary" @click="to('daka')">打卡</button> -->
-				<!-- <button type="default" @click="to('weight')">体重录入</button> -->
 				<button type="primary" @click="to('tuser')">学员管理</button>
-				<button type="default" @click="food_menu()">修改食谱</button>
-				<button type="primary" @click="food_to()">明日特供(订单)</button>
+				<button type="default" @click="to('food_menu')">食谱管理</button>
+				<button type="primary" @click="to('yuding_gl')">预订查看</button>
 				<button type="default" @click="other_message()">三维数据</button>
 				<button type="primary" @click="send_message()">发布通告</button>
 				<button type="default" @click="change_lb()">修改轮播图</button>
@@ -72,6 +70,10 @@
 				{
 					uni.navigateTo({
 						url:'../tuser/tuser'
+					})
+				}else if(where){
+					uni.navigateTo({
+						url:'../'+where+'/'+where
 					})
 				}
 				
