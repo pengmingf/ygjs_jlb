@@ -3,16 +3,25 @@
         <view class="input-group">
             <view class="input-row border">
                 <text class="title">账号：</text>
-                <m-input type="text" focus clearable v-model="account" placeholder="请输入账号"></m-input>
+                <m-input type="text" focus clearable v-model="account" placeholder="请输入手机号"></m-input>
             </view>
             <view class="input-row border">
                 <text class="title">密码：</text>
-                <m-input type="password" displayable v-model="password" placeholder="请输入密码"></m-input>
+                <m-input type="password" displayable v-model="password" placeholder="请输入密码(6-16位)"></m-input>
             </view>
-            <view class="input-row">
-                <text class="title">邮箱：</text>
-                <m-input type="text" clearable v-model="email" placeholder="请输入邮箱"></m-input>
+            <view class="input-row border">
+                <text class="title">姓名：</text>
+                <m-input type="text" clearable v-model="name"  placeholder="请输入姓名"></m-input>
             </view>
+			<view class="input-row border">
+			    <text class="title">性别：</text>
+			    <radio-group class="uni-flex" style="margin-top: 8upx;" @change='getSexValue' name="sex">
+			    	<label>
+			    		<radio value="0" checked />男</label>
+			    	<label>
+			    		<radio value="1" />女</label>
+			    </radio-group>
+			</view>
         </view>
         <view class="btn-row">
             <button type="primary" class="primary" @tap="register">注册</button>
@@ -32,19 +41,30 @@
             return {
                 account: '',
                 password: '',
-                email: ''
+                name: '',
+				sex:'男',
             }
         },
         methods: {
+			getSexValue(e)
+			{
+				var value = e.detail.value;
+				if(value == 0)
+				{
+					this.sex = '男';
+				}else{
+					this.sex = '女';
+				}
+			},
             register() {
                 /**
                  * 客户端对账号信息进行一些必要的校验。
                  * 实际开发中，根据业务需要进行处理，这里仅做示例。
                  */
-                if (this.account.length < 5) {
+                if (this.account.length != 11) {
                     uni.showToast({
                         icon: 'none',
-                        title: '账号最短为 5 个字符'
+                        title: '账号是手机号'
                     });
                     return;
                 }
@@ -55,31 +75,54 @@
                     });
                     return;
                 }
-                if (this.email.length < 3 || !~this.email.indexOf('@')) {
-                    uni.showToast({
-                        icon: 'none',
-                        title: '邮箱地址不合法'
-                    });
-                    return;
-                }
+				if (this.password.length > 16) {
+				    uni.showToast({
+				        icon: 'none',
+				        title: '密码最长为 16 个字符'
+				    });
+				    return;
+				}
 
                 const data = {
                     account: this.account,
                     password: this.password,
-                    email: this.email
+                    name: this.name,
+					sex:this.sex
                 }
-                service.addUser(data);
-                uni.showToast({
-                    title: '注册成功'
-                });
-                uni.navigateBack({
-                    delta: 1
-                });
+                uni.request({
+                	url:'https://ygjs.mfmeat.top/index.php/api/user/register',
+					data:data,
+					dataType:'json',
+					method:'POST',
+					success: (res) => {
+						if(res.data.code == 1)
+						{
+							uni.showToast({
+							    title: '注册成功',
+								duration:3000,
+							});
+						}else{
+							uni.showModal({
+								content:res.data.message
+							});
+						}
+					},fail() {
+						uni.showToast({
+							title:'网络异常！',
+							icon:'none'
+						})
+					}
+                })
+                
+                
             }
         }
     }
 </script>
 
 <style>
-
+.uni-flex {
+	display: flex;
+	flex-direction: row;
+}
 </style>

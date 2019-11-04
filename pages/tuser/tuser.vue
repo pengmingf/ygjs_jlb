@@ -17,17 +17,14 @@
 					<view  v-if="value.qiandao">
 						<button  type="primary" size="mini" style="margin-left:10upx ;" disabled >已到</button>
 					</view>
-					<!-- <view>
-						<button  type="primary" size="mini" style="margin-left:10upx ;" >{{multiArray[0][multiIndex[0]]}}</button>
-					</view> -->
 					<!-- 多列选择器 -->
 					<view class="uni-list-cell">
-						<picker mode="selector" :data-id='value.id' :data-index='key'  @change="before_weight"   :value="value.before_value" :range="array">
+						<picker mode="multiSelector" :data-id='value.id' :data-index='key'   @change="before_weight" :value="multiIndex" :range="allarray">
 							<button  type="default" size="mini" style="margin-left:10upx ;" >{{value.before_sp || "运动前"}}</button>
 						</picker>
 					</view>
 					<view class="uni-list-cell">
-						<picker mode="selector" :data-id='value.id' :data-index='key' @change="after_weight"  :value="value.after_value" :range="array"> 
+						<picker mode="multiSelector" :data-id='value.id' :data-index='key'  @change="after_weight"  :value="multiIndex" :range="allarray"> 
 							<button  type="warn" size="mini" style="margin-left:10upx ;" >{{value.after_sp || "运动后"}}</button>
 						</picker>
 					</view>
@@ -50,29 +47,11 @@
 			return {
 				showImg:true,
 				token : null,
-				list: [{
-						id:"97",
-						name: "杨过",
-						phone: "18723659468",
-						img: "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png",
-						qiandao:false
-					},
-					{
-						id:"98",
-						name: "郝少兵",
-						phone: "18723659468",
-						img: "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png",
-						qiandao:false
-					},
-					{
-						id:'99',
-						name: "周干鹏",
-						phone: "18723659468",
-						img: "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png",
-						qiandao:false
-					}
-				],
-				array: [],
+				list: [], //用户列表
+				array: [], //第一列整数体重
+				array2:[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9], // 第二列小数
+				allarray:[], //多列选择器
+				multiIndex: [35, 2], //多列选择器数组小标索引
 			}
 		},
 		methods: {
@@ -124,21 +103,20 @@
 			},
 			before_weight(e)
 			{
-				// var nub = e.currentTarget.dataset.index;
 				var tuser_id = e.currentTarget.dataset.id;
-				var weight = this.array[e.detail.value];
+				var weight = this.allarray[0][e.detail.value[0]]+this.allarray[1][e.detail.value[1]];
 				var status = 10;
 				this.weight_to(tuser_id,weight,status);
-				this.list[e.currentTarget.dataset.index].before_sp = this.array[e.detail.value];
+				this.list[e.currentTarget.dataset.index].before_sp = weight;
 			},
 			after_weight(e)
 			{
 				// var nub = e.currentTarget.dataset.index;
 				var tuser_id = e.currentTarget.dataset.id;
-				var weight = this.array[e.detail.value];
+				var weight = this.allarray[0][e.detail.value[0]]+this.allarray[1][e.detail.value[1]];
 				var status = 11;
 				this.weight_to(tuser_id,weight,status);
-				this.list[e.currentTarget.dataset.index].after_sp = this.array[e.detail.value];
+				this.list[e.currentTarget.dataset.index].after_sp = weight;
 			},
 			//写入服务器
 			weight_to(tuser_id,weight,status)
@@ -221,6 +199,7 @@
 		},
 		onReady() {
 			this.weight();
+			this.allarray = [this.array,this.array2];
 		}
 	}
 </script>

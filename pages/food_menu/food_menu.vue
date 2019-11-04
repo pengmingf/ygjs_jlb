@@ -13,13 +13,13 @@
 						</view>
 						<view class="uni-product-title">{{product.name}}</view> 
 						<view class="uni-product-price" v-if="product.favourPrice">
-							<text class="uni-product-price-favour">￥{{product.originalPrice}}</text>
-							<text class="uni-product-price-original">￥{{product.favourPrice}}</text>
+							<text class="uni-product-price-favour">￥{{product.originalPrice || 0}}</text>
+							<text class="uni-product-price-original">￥{{product.favourPrice || 0}}</text>
 							<text class="uni-product-tip" @click="food_on(product)">上架</text>
 							<!-- <text class="uni-product-tip" @click="food_off(product)">下架</text> -->
 						</view> 
 						<view class="uni-product-price" v-if="!product.favourPrice">
-							<text class="uni-product-price-original">￥{{product.originalPrice}}</text>
+							<text class="uni-product-price-original">￥{{product.originalPrice || 0}}</text>
 							<text class="uni-product-tip" @click="food_on(product)">上架</text>
 							<!-- <text class="uni-product-tip" @click="food_off(product)">下架</text> -->
 						</view>
@@ -35,7 +35,7 @@
 						</view>
 						<view class="uni-product-title">{{product.name}}</view> 
 						<view class="uni-product-price">
-							<text class="uni-product-price-original">￥{{product.originalPrice}}</text>
+							<text class="uni-product-price-original">￥{{product.originalPrice || 0}}</text>
 							<!-- <text class="uni-product-do-tip" @click="food_on(product)">上架</text> -->
 							<text class="uni-product-tip" @click="food_off(product)">下架</text>
 						</view>

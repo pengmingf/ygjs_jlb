@@ -50,6 +50,10 @@
             "path" : "pages/yuding_gl/yuding_gl",
             "style" : {}
         }
+        ,{
+            "path" : "pages/san_wei/san_wei",
+            "style" : {}
+        }
     ],
     "tabBar": {
         "color": "#7a7e83",
