@@ -9,6 +9,7 @@
 				success: (res) => {
 					if(version < res.data.version)
 					{
+						var wgeturl = res.data.wgeturl;
 						uni.showModal({
 							title: "版本更新",
 							content: '有新的版本发布，检测到您当前为Wifi连接，是否立即进行新版本下载？',
@@ -28,7 +29,7 @@
 										title:'下载中，请稍后...',
 									})
 									//设置 最新版本apk的下载链接
-									var downloadApkUrl = 'https://ygjs.mfmeat.top/index.php/api/main/update';
+									var downloadApkUrl = wgeturl;
 									var dtask = plus.downloader.createDownload( downloadApkUrl, {}, function ( d, status ) {  
 											// 下载完成  
 											if ( status == 200 ) {
@@ -36,6 +37,7 @@
 												plus.runtime.install(plus.io.convertLocalFileSystemURL(d.filename),{},{},function(error){  
 													uni.showToast({  
 														title: '安装失败', 
+														icon:'none',
 														duration: 1500  
 													});  
 												})

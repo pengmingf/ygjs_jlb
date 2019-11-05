@@ -34,10 +34,8 @@
 						<t-td>餐品：</t-td>
 						<!-- <t-td >鸡腿：2个</t-td> -->
 						<t-td>{{ items.food_name }}：{{ items.nub }}个</t-td>
-						<!-- <t-td>披萨：1个</t-td> -->
-					</t-tr>
-					<t-tr>
 						<t-td>总计：{{total}}个</t-td>
+						<!-- <t-td>披萨：1个</t-td> -->
 					</t-tr>
 				</t-table>
 			</view>

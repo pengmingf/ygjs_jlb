@@ -1,0 +1,1 @@
+<view><view>{{tuser.name}}</view><image style="width:300rpx;height:200rpx;" src="{{tuser.image}}" mode></image><view>{{tuser.sex}}</view><view>{{tuser.phone}}</view><view>{{tuser.qq}}</view><view>{{tuser.wx}}</view></view>
