@@ -5,12 +5,12 @@
     "iPad"
   ],
   "id": "__UNI__57FC3FF",
-  "name": "ygjs_jlb",
+  "name": "艾迪森健身模特教练端",
   "version": {
-    "name": "1.0.0",
-    "code": "100"
+    "name": "1.0.2",
+    "code": 102
   },
-  "description": "登录模板",
+  "description": "艾迪森健身模特的教练端，管理客户端数据",
   "launch_path": "__uniappview.html",
   "developer": {
     "name": "",
@@ -46,6 +46,45 @@
     },
     "usingComponents": true,
     "distribute": {
+      "icons": {
+        "android": {
+          "hdpi": "unpackage/res/icons/72x72.png",
+          "xhdpi": "unpackage/res/icons/96x96.png",
+          "xxhdpi": "unpackage/res/icons/144x144.png",
+          "xxxhdpi": "unpackage/res/icons/192x192.png"
+        },
+        "ios": {
+          "appstore": "unpackage/res/icons/1024x1024.png",
+          "ipad": {
+            "app": "unpackage/res/icons/76x76.png",
+            "app@2x": "unpackage/res/icons/152x152.png",
+            "notification": "unpackage/res/icons/20x20.png",
+            "notification@2x": "unpackage/res/icons/40x40.png",
+            "proapp@2x": "unpackage/res/icons/167x167.png",
+            "settings": "unpackage/res/icons/29x29.png",
+            "settings@2x": "unpackage/res/icons/58x58.png",
+            "spotlight": "unpackage/res/icons/40x40.png",
+            "spotlight@2x": "unpackage/res/icons/80x80.png"
+          },
+          "iphone": {
+            "app@2x": "unpackage/res/icons/120x120.png",
+            "app@3x": "unpackage/res/icons/180x180.png",
+            "notification@2x": "unpackage/res/icons/40x40.png",
+            "notification@3x": "unpackage/res/icons/60x60.png",
+            "settings@2x": "unpackage/res/icons/58x58.png",
+            "settings@3x": "unpackage/res/icons/87x87.png",
+            "spotlight@2x": "unpackage/res/icons/80x80.png",
+            "spotlight@3x": "unpackage/res/icons/120x120.png"
+          }
+        }
+      },
+      "splashscreen": {
+        "android": {
+          "hdpi": "C:/Users/Administrator/Desktop/zzz/zzz.png",
+          "xhdpi": "C:/Users/Administrator/Desktop/zzz/720X1242.png",
+          "xxhdpi": "C:/Users/Administrator/Desktop/zzz/1080X1882.png"
+        }
+      },
       "google": {
         "permissions": [
           "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",

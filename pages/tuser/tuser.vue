@@ -84,15 +84,15 @@
 			
 			add()
 			{
-				uni.showToast({
-					title: '暂无'
-				});
+				uni.navigateTo({
+					url:'../reg/reg',
+				})
 			},
 			
 			delet()
 			{
 				uni.showToast({
-					title: '暂无'
+					title: '不准删除'
 				});
 			},
 			detail(value)

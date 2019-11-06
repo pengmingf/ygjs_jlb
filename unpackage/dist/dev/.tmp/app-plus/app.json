@@ -4,7 +4,14 @@
     "pages/main/main",
     "pages/reg/reg",
     "pages/pwd/pwd",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/daka/daka",
+    "pages/tuser/tuser",
+    "pages/tuser_detail/tuser_detail",
+    "pages/tuser_weight/tuser_weight",
+    "pages/food_menu/food_menu",
+    "pages/yuding_gl/yuding_gl",
+    "pages/san_wei/san_wei"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -36,7 +43,7 @@
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
-  "appname": "ygjs_jlb",
+  "appname": "艾迪森健身模特教练端",
   "compilerVersion": "2.3.7",
   "usingComponents": {}
 }

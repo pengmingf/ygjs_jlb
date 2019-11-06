@@ -16,16 +16,6 @@
 				<button type="default" @click="change_lb()">修改轮播图</button> -->
 			</view>
         </view>
-        
-		<view v-if="!is_login" class="hello">
-            <view class="title">
-                您好 游客。
-            </view>
-            <view class="ul">
-                <view>这是 uni-app 带登录模板的示例App首页。</view>
-                <view>在 “我的” 中点击 “登录” 可以 “登录您的账户”</view>
-            </view>
-        </view>
     </view>
 </template>
 
